@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>MyApp</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
+
+		
+		<script src="//vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
+ 
+		<script type="text/javascript">
+		
+		var host = location.origin.replace(/^http/, 'ws');
+    var ws = new WebSocket(host);
+     
+    ws.onmessage = function (event) {
+      console.log(JSON.parse(event.data));
+     
+      var msg = {
+        type: "my other event",
+        data: "other event data"
+      };
+     
+      ws.send(JSON.stringify(msg));
+    };
+
+		VK.init(function() {
+			console.log('API initialization true');
+			VK.api('users.get', {test_mode: 1, fields:"screen_name"}, function(data) {  
+				if (data.error)
+			      alert('error!'+data.error);
+			   else {
+			   	  var a = data.response[0].screen_name;  
+			   	  //console.log("UserName " + a);
+			   	  //$("#screen_name").append(a);
+			   	  $("#screen_name").attr('class',a);
+			      //alert("UserName " + a);
+			      $("#user").append('Привет, ' + data.response[0].first_name + ' ' + data.response[0].last_name);
+			      //alert("Меня зовут " + b);
+			      /*var idd = $("#screen_name").attr('class');
+						alert("Вы выиграли! " + idd);*/
+			   }
+			});
+			VK.api("friends.getAppUsers", {test_mode: 1}, function (data) {
+				if (data.response != null) {
+					console.log('getAppUsers', data.response);
+					alert("!!!! " + data.response);
+				}
+			});
+			
+		}, function() { 
+			 console.log('API initialization failed');
+		}, '5.33');
+		
+		
+		</script>
+		
+		
+	</head>
+	<body onload="init();" id="body">
+		<p id="user"></p>
+		<canvas id="gameCanvas" width="600" height="350" style="margin-top:30px;">
+		</canvas>
+			<p id="screen_name"></p>
+			<p id="record"></p>
+			<p id="count"></p>
+			<p>ARPU = 100000$ / MAU = 100000$ / 20000 = 5$</p>
+			<p>ARPPU = 100000$ / (MAU * 0.02) = 100000$ / 400 = 250$ или ARPPU = ARPU / 0.02</p>
+	</body>
+
+
+</html>
