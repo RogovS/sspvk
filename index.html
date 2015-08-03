@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<title>MyApp</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-		<script src="//vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
  
 		<script type="text/javascript">
 		
@@ -14,10 +13,9 @@
     ws.onmessage = function (event) {
       var data = JSON.parse(event.data);
       
-      jQuery("h1.name").text(data.name);
-      jQuery("p.description").text(data.description);
+      $("h1.name").text("jhgf4567865");
+      $("p.description").text(data.description);
 
-     
       var msg = {
         type: "my other event",
         data: "other event data"
@@ -25,7 +23,7 @@
        
       ws.send(JSON.stringify(msg));
     };
-		
+		$("p.description").text("123123123123132");
 		
 	</script>
 		
@@ -33,7 +31,7 @@
 		<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 		
 	</head>
-	<body onload="init();" id="body">
+	<body id="body">
 		
 		<div class="container">
 
