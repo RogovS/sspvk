@@ -15,9 +15,9 @@
     var ws = new WebSocket(host);
      
     ws.onmessage = function (event) {
-      console.log(JSON.parse(event.data));
+      console.log(JSON.parse(event.data.response[0].name));
       
-      $("h1").text(event.data.response[0].name);
+      $("h1").text("jhgtrjyuyhtgrgjkjhgf");
      
       var msg = {
         type: "my other event",
