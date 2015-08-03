@@ -20,6 +20,10 @@ var mongo = require('mongoskin');
 var connectionBigData = mongo.db("mongodb://admin:admin@ds035240.mongolab.com:35240/bigdata");
 var connectionClientData = mongo.db("mongodb://admin:admin@ds043991.mongolab.com:43991/clientdata");
 
+var collection_wall = 'wall';
+var collection_aboutgroup = 'aboutgroup';
+var collection_top = 'top';
+
 var vk = new VK({
    'appId'     : 5019588,
    'appSecret' : 'dhk6znlyjSVdA3o4DTBt',
@@ -53,28 +57,35 @@ vk.on('event', function(data) {
          );
       };
    }
-
-   var collection_wall = 'wall';
-   var collection_aboutgroup = 'aboutgroup';
-   var collection_top = 'top';
    
    var RecordableVKPostInBD = new AddDataInBD(connectionClientData, collection_aboutgroup, VKAboutGroup);
    RecordableVKPostInBD.EntryInDB();
 
 });
 
-
 wss.on("connection", function(ws) {
   console.log("websocket connection open");
-  var msg = {
-      type: "news",
-      data: "hello world"
-  };
-  ws.send(JSON.stringify(msg));
- 
-  ws.onmessage = function(d) {
-    msg = JSON.parse(d.data);
-    console.log("websocket messsage received");
-    console.log(msg);
-  };
+  connectionClientData.collection(collection_aboutgroup).findOne(
+   {
+      id: 16202769
+   },
+   function(err, doc)
+   {
+      if (err) { console.log("Ошибка!!"); }
+      if (doc) 
+      { 
+         console.log(doc); 
+         var msg = {
+            type: "news",
+            data: doc
+         };
+         ws.send(JSON.stringify(msg));
+         ws.onmessage = function(d) {
+            msg = JSON.parse(d.data);
+            console.log("websocket messsage received");
+            console.log(msg);
+         };
+      }
+   });
+  
 });
