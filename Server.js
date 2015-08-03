@@ -30,10 +30,11 @@ vk.setSecureRequests(false);
 vk.request('groups.getById', {'group_id': "khl", 'fields': 'description'}, 'event');
 vk.on('event', function(data) {
    
-   var VKPost = {
+   var VKAboutGroup = {
       id: data.response[0].id,
    	name: data.response[0].name,
-   	description: data.response[0].description
+   	description: data.response[0].description,
+   	photo_200: data.response[0].photo_200
    };
    
    function AddDataInBD(db,collection,data) {
@@ -53,9 +54,11 @@ vk.on('event', function(data) {
       };
    }
 
-   var collection = 'wall';
+   var collection_wall = 'wall';
+   var collection_aboutgroup = 'aboutgroup';
+   var collection_top = 'top';
    
-   var RecordableVKPostInBD = new AddDataInBD(connectionBigData, collection, VKPost);
+   var RecordableVKPostInBD = new AddDataInBD(connectionClientData, collection_aboutgroup, VKAboutGroup);
    RecordableVKPostInBD.EntryInDB();
 
 });
