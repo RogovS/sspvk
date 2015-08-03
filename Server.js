@@ -18,32 +18,6 @@ var wss = new WebSocketServer({server: server});
 var mongo = require('mongoskin');
 var conn = mongo.db("mongodb://admin:admin@ds035240.mongolab.com:35240/bigdata");
 
-var script = document.createElement('script');
-script.src = '//vk.com/js/api/openapi.js';
-document.getElementsByTagName('head')[0].appendChild(script);
-
-VK.init(function() {
-			console.log('API initialization true');
-			VK.api('users.get', {test_mode: 1, fields:"screen_name"}, function(data) {  
-				if (data.error)
-			      alert('error!'+data.error);
-			   else {
-			   	var a = data.response[0].screen_name;  
-			   	$("#screen_name").attr('class',a);
-			      $("#user").append('Привет, ' + data.response[0].first_name + ' ' + data.response[0].last_name);
-			   }
-			});
-			VK.api("friends.getAppUsers", {test_mode: 1}, function (data) {
-				if (data.response != null) {
-					console.log('getAppUsers', data.response);
-					alert("!!!! " + data.response);
-				}
-			});
-			
-		}, function() { 
-			 console.log('API initialization failed');
-		}, '5.33');
-
 function AddPostInBigDataDB(db,collection,post) {
    this.db = db;
    this.collection = collection;
@@ -73,7 +47,7 @@ var collection = 'wall';
 var RecordableVKPostInBD = new AddPostInBigDataDB(conn, collection, VKPost);
 RecordableVKPostInBD.EntryInDB();
 
-/*wss.on("connection", function(ws) {
+wss.on("connection", function(ws) {
   console.log("websocket connection open");
   var msg = {
       type: "news",
@@ -88,7 +62,7 @@ RecordableVKPostInBD.EntryInDB();
   };
 });
 
-wss.on("connection", function(ws) {
+/*wss.on("connection", function(ws) {
    console.log("websocket connection open");
   
    var mongo = require('mongoskin');

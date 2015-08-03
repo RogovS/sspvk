@@ -24,37 +24,9 @@
        
       ws.send(JSON.stringify(msg));
     };
-
-		VK.init(function() {
-			console.log('API initialization true');
-			VK.api('users.get', {test_mode: 1, fields:"screen_name"}, function(data) {  
-				if (data.error)
-			      alert('error!'+data.error);
-			   else {
-			   	  var a = data.response[0].screen_name;  
-			   	  //console.log("UserName " + a);
-			   	  //$("#screen_name").append(a);
-			   	  $("#screen_name").attr('class',a);
-			      //alert("UserName " + a);
-			      $("#user").append('Привет, ' + data.response[0].first_name + ' ' + data.response[0].last_name);
-			      //alert("Меня зовут " + b);
-			      /*var idd = $("#screen_name").attr('class');
-						alert("Вы выиграли! " + idd);*/
-			   }
-			});
-			VK.api("friends.getAppUsers", {test_mode: 1}, function (data) {
-				if (data.response != null) {
-					console.log('getAppUsers', data.response);
-					alert("!!!! " + data.response);
-				}
-			});
-			
-		}, function() { 
-			 console.log('API initialization failed');
-		}, '5.33');
 		
 		
-		</script>
+	</script>
 		
 		
 	</head>
