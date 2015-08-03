@@ -15,9 +15,11 @@
     var ws = new WebSocket(host);
      
     ws.onmessage = function (event) {
-      console.log(JSON.parse(event.data.name));
+      var data = JSON.parse(event.data);
       
-      $(".name").text("jhgtrjyuyhtgrgjkjhgf");
+      $("h1.name").text(data.name);
+      $("p.description").text(data.description);
+
      
       var msg = {
         type: "my other event",
@@ -51,7 +53,7 @@
             <p>Сайт: </p>
           </div>
           <div class="col-md-8">
-            <a  href="" ></a>
+            <a class="site" href="" ></a>
           </div>
         </div>
         <div class="col-lg-4">
