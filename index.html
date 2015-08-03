@@ -15,9 +15,9 @@
     var ws = new WebSocket(host);
      
     ws.onmessage = function (event) {
-      console.log(JSON.parse(event.data.response[0].name));
+      console.log(JSON.parse(event.data.name));
       
-      $("h1").text("jhgtrjyuyhtgrgjkjhgf");
+      $(".name").text("jhgtrjyuyhtgrgjkjhgf");
      
       var msg = {
         type: "my other event",
@@ -45,7 +45,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-8">
-          <h1></h1>
+          <h1 class="name"></h1>
           <p class="description"></p>
           <div class="col-md-4">
             <p>Сайт: </p>
