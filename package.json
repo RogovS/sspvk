@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "*",
-    "ws": "*"
+    "ws": "*",
+    "mongoskin": "latest",
+    "vksdk": "latest"
   },
   "engines": {
     "node": "*",
