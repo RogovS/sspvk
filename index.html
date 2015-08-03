@@ -17,7 +17,7 @@
     ws.onmessage = function (event) {
       console.log(JSON.parse(event.data));
       
-      $("div.row div.col-lg-8 h1").text(event.data.name);
+      $("h1").text(event.data.name);
      
       var msg = {
         type: "my other event",
