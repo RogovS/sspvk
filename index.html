@@ -12,9 +12,10 @@
      
     ws.onmessage = function (event) {
       var data = JSON.parse(event.data);
+      console.log(data.name);
       
       $("h1.name").text("jhgf4567865");
-      $("p.description").text(data.description);
+      $("p.description").text(data.response[0].description);
 
       var msg = {
         type: "my other event",
@@ -23,7 +24,6 @@
        
       ws.send(JSON.stringify(msg));
     };
-		$("p.description").text("123123123123132");
 		
 	</script>
 		
