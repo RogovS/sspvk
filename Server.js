@@ -31,14 +31,15 @@ var vk = new VK({
 });
 
 vk.setSecureRequests(false);
-vk.request('groups.getById', {'group_id': "khl", 'fields': 'description'}, 'event');
+vk.request('groups.getById', {'group_id': "khl", 'fields': 'site,description'}, 'event');
 vk.on('event', function(data) {
    
    var VKAboutGroup = {
       id: data.response[0].id,
    	name: data.response[0].name,
    	description: data.response[0].description,
-   	photo_200: data.response[0].photo_200
+   	photo_200: data.response[0].photo_200,
+   	site: data.response[0].site
    };
    
    function AddDataInBD(db,collection,data) {

@@ -16,6 +16,8 @@
      
     ws.onmessage = function (event) {
       console.log(JSON.parse(event.data));
+      
+      $("div.row div.col-lg-8 h1").text(event.data.name);
      
       var msg = {
         type: "my other event",
@@ -33,9 +35,6 @@
 		
 	</head>
 	<body onload="init();" id="body">
-		<p id="user"></p>
-		<canvas id="gameCanvas" width="600" height="350" style="margin-top:30px;">
-		</canvas>
 		
 		<div class="container">
 
@@ -43,15 +42,21 @@
         <h1 class="text-muted">Тестовое приложение</h1>
       </div>
 
-      <!-- Jumbotron -->
-      <div class="jumbotron">
-        <h1>Marketing stuff!</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
-      </div>
-
       <!-- Example row of columns -->
       <div class="row">
+        <div class="col-lg-8">
+          <h1></h1>
+          <p class="description"></p>
+          <div class="col-md-4">
+            <p>Сайт: </p>
+          </div>
+          <div class="col-md-8">
+            <a  href="" ></a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <img src="">
+        </div>
         <div class="col-lg-4">
           <h2>Safari bug warning!</h2>
           <p class="text-danger">As of v7.0.1, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
