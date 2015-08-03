@@ -4,8 +4,8 @@
   "dependencies": {
     "express": "*",
     "ws": "*",
-    "mongoskin": "latest",
-    "vksdk": "latest"
+    "mongoskin": "*",
+    "vksdk": "*"
   },
   "engines": {
     "node": "*",
