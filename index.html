@@ -18,7 +18,7 @@
       $("h1#name").text(data.name);
       $("p#description").text(data.description);
       $("p#psite").text(data.site);
-      $("a#asite").attr("href", data.site);
+      $("a#asite").attr+("href", data.site);
       $("#image").attr("src", data.photo_200);
 
       var msg = {
@@ -47,7 +47,7 @@
       <div class="row">
         
         <div class="col-lg-3">
-          <img style="width:100%;" id="image" src="">
+          <img id="image" src="">
         </div>
         
         <div class="col-lg-6">
@@ -57,7 +57,7 @@
             <p>Сайт: </p>
           </div>
           <div class="col-lg-8">
-            <a id="asite" href="" ><p id="psite"></p></a>
+            <a id="asite" href="https://" ><p id="psite"></p></a>
           </div>
         </div>
         
@@ -65,7 +65,7 @@
           <!-- VK Widget -->
           <div id="vk_groups"></div>
           <script type="text/javascript">
-          VK.Widgets.Group("vk_groups", {mode: 0, width: "100%", height: "200", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 16202769);
+          VK.Widgets.Group("vk_groups", {mode: 0, width: "220", height: "200", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 16202769);
           </script>
         </div>
         
