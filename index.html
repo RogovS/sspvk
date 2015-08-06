@@ -11,8 +11,8 @@
     var ws = new WebSocket(host);
      
     ws.onmessage = function (event) {
-      var newdata = JSON.parse(event.data);
-      console.log(newdata.response[0]);
+      var newdata = JSON.parse(event.data).name;
+      console.log(newdata);
       
       $("h1.name").text(newdata);
       $("p.description").text(newdata.description);
