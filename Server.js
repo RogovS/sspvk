@@ -1,6 +1,8 @@
 var express = require('express');
 var http = require('http');
 var VK = require('vksdk');
+var cheerio = require('cheerio');
+var request = require('request');
 var app = express();
 var server = http.createServer(app);
 var port = process.env.PORT || 3000;
@@ -28,6 +30,38 @@ var vk = new VK({
    'appId'     : 5019588,
    'appSecret' : 'dhk6znlyjSVdA3o4DTBt',
    'language'  : 'ru'
+});
+
+var vkID = 16202769;
+//var posts = document.getElementsById('page_wall_posts');
+//console.log(posts);
+
+function parserGo(){
+  $.ajax('https://vk.com/'.concat(vkID)).done(function (data) {
+    var idpost = '';
+    $(data).find('#page_wall_posts').each(function(){
+      idpost+=this.innerText;
+    });
+    console.log(idpost);
+  });
+}
+
+parserGo();
+
+request({
+    method: 'GET',
+    url: 'https://github.com/showcases'
+}, function(err, response, body) {
+    if (err) return console.error(err);
+
+    // Tell Cherrio to load the HTML
+    $ = cheerio.load(body);
+    $('li.collection-card').each(function() {
+            var href = $('a.collection-card-image', this).attr('href');
+            if (href.lastIndexOf('/') > 0) {
+                console.log($('h3', this).text());
+            }
+    });
 });
 
 vk.setSecureRequests(false);
@@ -68,7 +102,7 @@ wss.on("connection", function(ws) {
   console.log("websocket connection open");
   connectionClientData.collection(collection_aboutgroup).findOne(
    {
-      id: 16202769
+      id: vkID
    },
    function(err, doc)
    {
