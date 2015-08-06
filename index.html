@@ -18,7 +18,7 @@
       $("h1#name").text(data.name);
       $("p#description").text(data.description);
       $("p#psite").text(data.site);
-      $("a#asite").attr+("href", data.site);
+      $("a#asite").attr("href", "https://".concat(data.site));
       $("#image").attr("src", data.photo_200);
 
       var msg = {
@@ -57,7 +57,7 @@
             <p>Сайт: </p>
           </div>
           <div class="col-lg-8">
-            <a id="asite" href="https://" ><p id="psite"></p></a>
+            <a id="asite" href="" ><p id="psite"></p></a>
           </div>
         </div>
         
