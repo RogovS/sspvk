@@ -12,9 +12,9 @@
      
     ws.onmessage = function (event) {
       var newdata = JSON.parse(event.data);
-      console.log(newdata);
+      console.log(newdata.name);
       
-      $("h1.name").text("jhgf4567865");
+      $("h1.name").text(newdata);
       $("p.description").text(newdata.description);
 
       var msg = {
