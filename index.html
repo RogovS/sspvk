@@ -14,9 +14,10 @@
       var data = JSON.parse(event.data).data;
       console.log(data);
       
-      $("h1.name").text(data.name);
-      $("p.description").text(data.description);
-      $("a.site").href(data.site);
+      $("h1#name").text(data.name);
+      $("p#description").text(data.description);
+      $("a#site").attr("href", data.site);
+      $("#image").attr("src", data.photo_200);
 
       var msg = {
         type: "my other event",
@@ -43,17 +44,17 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-8">
-          <h1 class="name"></h1>
-          <p class="description"></p>
+          <h1 id="name"></h1>
+          <p id="description"></p>
           <div class="col-md-4">
             <p>Сайт: </p>
           </div>
           <div class="col-md-8">
-            <a class="site" href="" ></a>
+            <a id="site" href="" ></a>
           </div>
         </div>
         <div class="col-lg-4">
-          <img src="">
+          <img id="image" src="">
         </div>
         <div class="col-lg-4">
           <h2>Safari bug warning!</h2>
