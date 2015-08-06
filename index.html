@@ -13,8 +13,16 @@
     ws.onmessage = function (event) {
       var newdata = JSON.parse(event.data);
       console.log(newdata);
+      console.log(newdata.name);
+      console.log(newdata.data);
+      console.log(newdata.data.name);
+      console.log(newdata.id);
       
       $("h1.name").text(newdata);
+      $("h1.name").text(newdata.name);
+      $("h1.name").text(newdata.data);
+      $("h1.name").text(newdata.data.name);
+      $("h1.name").text(newdata.id);
       $("p.description").text(newdata.description);
 
       var msg = {
