@@ -59,9 +59,9 @@ function AddDataInBD(db,collection,data) {
          data,
          { upsert:true },
          function (error, count, status) {
-            console.log(error);
-            console.log(count);
-            console.log(status);
+            //console.log(error);
+            //console.log(count);
+            //console.log(status);
          }
       );
    };
@@ -108,7 +108,7 @@ vk.on('event', function(data) {
 
 wss.on("connection", function(ws) {
    console.log("websocket connection open");
-   connectionClientData.collection(collection_aboutgroup).findOne(
+   /*connectionClientData.collection(collection_aboutgroup).findOne(
    {
       id: vkID
    },
@@ -122,6 +122,7 @@ wss.on("connection", function(ws) {
             type: "abouGroup",
             data: doc
          };
+         console.log(msg.data);
          ws.send(JSON.stringify(msg));
          ws.onmessage = function(d) {
          msg = JSON.parse(d.data);
@@ -129,7 +130,7 @@ wss.on("connection", function(ws) {
          console.log(msg);
          };
       }
-   });
+   });*/
    
    connectionClientData.collection(collection_post).find(
    {
@@ -150,6 +151,7 @@ wss.on("connection", function(ws) {
             type: "likes",
             data: doc
          };
+         console.log(msg.data);
          ws.send(JSON.stringify(msg));
          ws.onmessage = function(d) {
          msg = JSON.parse(d.data);
