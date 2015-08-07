@@ -24,7 +24,7 @@ var connectionClientData = mongo.db("mongodb://admin:admin@ds043991.mongolab.com
 
 var collection_wall = 'wall';
 var collection_aboutgroup = 'aboutgroup';
-var collection_top = 'top';
+var collection_post = 'post';
 
 var vk = new VK({
    'appId'     : 5019588,
@@ -33,35 +33,58 @@ var vk = new VK({
 });
 
 var vkID = 16202769;
-//var posts = document.getElementsById('page_wall_posts');
-//console.log(posts);
-
-function parserGo(){
-  $.ajax('https://vk.com/'.concat(vkID)).done(function (data) {
-    var idpost = '';
-    $(data).find('#page_wall_posts').each(function(){
-      idpost+=this.innerText;
-    });
-    console.log(idpost);
-  });
-}
-
-parserGo();
+var domain = 'khl';
+var count = 10;
+var idpost = new Array(0);
 
 request({
-    method: 'GET',
-    url: 'https://github.com/showcases'
-}, function(err, response, body) {
-    if (err) return console.error(err);
+   method: 'POST',
+   url: 'https://vk.com/'.concat(domain)
+   }, 
+   function(err, response, body) {
+   if (err) return console.error(err);
 
-    // Tell Cherrio to load the HTML
-    $ = cheerio.load(body);
-    $('li.collection-card').each(function() {
-            var href = $('a.collection-card-image', this).attr('href');
-            if (href.lastIndexOf('/') > 0) {
-                console.log($('h3', this).text());
-            }
-    });
+   $ = cheerio.load(body);
+   $('div.post.all.own').each(function() {
+      idpost[idpost.length] = $(this).attr("id").substr($(this).attr("id").indexOf('_')+1,$(this).attr("id").length);
+   });
+
+    
+function AddDataInBD(db,collection,data) {
+   this.db = db;
+   this.collection = collection;
+   this.EntryInDB = function() {
+      db.collection(collection).update(
+         { id: data.id }, 
+         data,
+         { upsert:true },
+         function (error, count, status) {
+            console.log(error);
+            console.log(count);
+            console.log(status);
+         }
+      );
+   };
+}
+      
+vk.setSecureRequests(false);
+vk.request('wall.get', {'domain': domain, 'count': count}, 'post');
+vk.on('post', function(data) {
+   
+   var VKGroupPost = new Array(count);
+   for (var i = 0; i < count; i++) {
+      VKGroupPost[i] = {
+         id: idpost[i],
+         comments: data.response.items[i].comments,
+         likes: data.response.items[i].likes,
+         reposts: data.response.items[i].reposts,
+         text: data.response.items[i].text,
+      };
+      
+      var RecordableVKPostInBD = new AddDataInBD(connectionClientData, collection_post, VKGroupPost[i]);
+      RecordableVKPostInBD.EntryInDB();
+   }
+   
 });
 
 vk.setSecureRequests(false);
@@ -76,25 +99,10 @@ vk.on('event', function(data) {
    	site: data.response[0].site
    };
    
-   function AddDataInBD(db,collection,data) {
-      this.db = db;
-      this.collection = collection;
-      this.EntryInDB = function() {
-         db.collection(collection).update(
-            { id: data.id }, 
-            data,
-            { upsert:true },
-            function (error, count, status) {
-               console.log(error);
-               console.log(count);
-               console.log(status);
-            }
-         );
-      };
-   }
-   
-   var RecordableVKPostInBD = new AddDataInBD(connectionClientData, collection_aboutgroup, VKAboutGroup);
-   RecordableVKPostInBD.EntryInDB();
+   var RecordableVKGroupInBD = new AddDataInBD(connectionClientData, collection_aboutgroup, VKAboutGroup);
+   RecordableVKGroupInBD.EntryInDB();
+
+});
 
 });
 
