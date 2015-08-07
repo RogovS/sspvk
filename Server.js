@@ -123,6 +123,11 @@ wss.on("connection", function(ws) {
             data: doc
          };
          ws.send(JSON.stringify(msg));
+         ws.onmessage = function(d) {
+         msg = JSON.parse(d.data);
+         console.log("websocket messsage received");
+         console.log(msg);
+         };
       }
    });
    
@@ -146,6 +151,11 @@ wss.on("connection", function(ws) {
             data: doc
          };
          ws.send(JSON.stringify(msg));
+         ws.onmessage = function(d) {
+         msg = JSON.parse(d.data);
+         console.log("websocket messsage received");
+         console.log(msg);
+         };
       }
    });
   
