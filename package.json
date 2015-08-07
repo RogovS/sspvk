@@ -5,7 +5,9 @@
     "express": "*",
     "ws": "*",
     "mongoskin": "*",
-    "vksdk": "*"
+    "vksdk": "*",
+    "cheerio": "*",
+    "request": "*"
   },
   "engines": {
     "node": "*",
