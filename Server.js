@@ -119,7 +119,7 @@ wss.on("connection", function(ws) {
       { 
          console.log(doc); 
          var msg = {
-            type: "aboutGroup",
+            type: "news",
             data: doc
          };
          ws.send(JSON.stringify(msg));
