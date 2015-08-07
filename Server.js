@@ -132,7 +132,31 @@ wss.on("connection", function(ws) {
       }
    });*/
    
-   console.log(connectionClientData.collection(collection_post).find())
+   connectionClientData.collection(collection_post).findOne(
+   {
+      id: 1012239
+   },
+   function(err, doc)
+   {
+      if (err) { console.log("Ошибка!!"); }
+      if (doc) 
+      { 
+         console.log(doc); 
+         var msg = {
+            type: "abouGroup",
+            data: doc
+         };
+         console.log(msg.data);
+         ws.send(JSON.stringify(msg));
+         ws.onmessage = function(d) {
+         msg = JSON.parse(d.data);
+         console.log("websocket messsage received");
+         console.log(msg);
+         };
+      }
+   });
+   
+   //console.log(connectionClientData.collection(collection_post).find())
    /*{
       "sort": "likes",
       "limit": 10,
@@ -162,6 +186,6 @@ wss.on("connection", function(ws) {
          console.log(msg);
          }; 
       }
-   });*/;
+   });*///;
   
 });
