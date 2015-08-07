@@ -131,9 +131,9 @@ wss.on("connection", function(ws) {
       }
    });
    
-   /*connectionClientData.collection(collection_post).findOne(
+   connectionClientData.collection(collection_post).find(
    {
-      id: vkID
+      
    }, 
    {
       "sort": "likes",
@@ -157,6 +157,6 @@ wss.on("connection", function(ws) {
          console.log(msg);
          };
       }
-   });*/
+   });
   
 });
