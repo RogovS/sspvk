@@ -138,6 +138,12 @@ wss.on("connection", function(ws) {
       "limit": 10,
       "skip": 3
    },
+   {
+      text: true,
+      likes: true,
+      comments: true,
+      reposts: true
+   },
    function(err, doc)
    {
       if (err) { console.log("Ошибка!!"); }
