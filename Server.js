@@ -108,7 +108,7 @@ vk.on('event', function(data) {
 
 wss.on("connection", function(ws) {
    console.log("websocket connection open");
-   console.log(connectionClientData.collection(collection_aboutgroup).findOne(
+   connectionClientData.collection(collection_aboutgroup).findOne(
    {
       id: vkID
    },
@@ -130,10 +130,10 @@ wss.on("connection", function(ws) {
          console.log(msg);
          };
       }
-   }));
+   });
    
-   //console.log(connectionClientData.collection(collection_post).find())
-   /*{
+   /*console.log(connectionClientData.collection(collection_post).find())
+   {
       "sort": "likes",
       "limit": 10,
       "skip": 3
@@ -162,6 +162,6 @@ wss.on("connection", function(ws) {
          console.log(msg);
          }; 
       }
-   });*///;
+   });*
   
 });
