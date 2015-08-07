@@ -157,7 +157,7 @@ wss.on("connection", function(ws) {
          msg = JSON.parse(d.data);
          console.log("websocket messsage received");
          console.log(msg);
-         };
+         }; 
       }
    });
   
