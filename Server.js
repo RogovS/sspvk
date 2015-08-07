@@ -134,11 +134,8 @@ wss.on("connection", function(ws) {
    
    connectionClientData.collection(collection_post).find(
    {
-      
-   }, 
-   {
       "sort": "likes",
-      "limit": 1,
+      "limit": 10,
       "skip": 3
    },
    function(err, doc)
