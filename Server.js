@@ -107,8 +107,8 @@ vk.on('event', function(data) {
 });
 
 wss.on("connection", function(ws) {
-  console.log("websocket connection open");
-  connectionClientData.collection(collection_aboutgroup).findOne(
+   console.log("websocket connection open");
+   connectionClientData.collection(collection_aboutgroup).findOne(
    {
       id: vkID
    },
@@ -119,15 +119,33 @@ wss.on("connection", function(ws) {
       { 
          console.log(doc); 
          var msg = {
-            type: "news",
+            type: "aboutGroup",
             data: doc
          };
          ws.send(JSON.stringify(msg));
-         ws.onmessage = function(d) {
-            msg = JSON.parse(d.data);
-            console.log("websocket messsage received");
-            console.log(msg);
+      }
+   });
+   
+   connectionClientData.collection(collection_post).findOne(
+   {
+      id: vkID
+   }, 
+   {
+      "sort": "likes",
+      "limit": 1,
+      "skip": 3
+   },
+   function(err, doc)
+   {
+      if (err) { console.log("Ошибка!!"); }
+      if (doc) 
+      { 
+         console.log(doc); 
+         var msg = {
+            type: "likes",
+            data: doc
          };
+         ws.send(JSON.stringify(msg));
       }
    });
   
