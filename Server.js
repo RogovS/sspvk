@@ -37,7 +37,7 @@ var domain = 'khl';
 var count = 10;
 var idpost = new Array(0);
 
-request({
+/*request({
    method: 'POST',
    url: 'https://vk.com/'.concat(domain)
    }, 
@@ -104,7 +104,7 @@ vk.on('event', function(data) {
 
 });
 
-});
+});*/
 
 wss.on("connection", function(ws) {
    console.log("websocket connection open");
